@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>Welcome {{username}}</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            text-align: center;
+
+            background-image: url('images/stars-changing-colors.gif');
+            background-size: cover;
+        }
+
+        img {
+            width: 20%;
+            height: auto;
+        }
+    </style>
+</head>
+
+<!-- Displays Welcome Message for Logged In/Out Users -->
+<body style="background-image: url('{% static 'images/stars-changing-colors.gif' %}')">
+  {% if user.is_authenticated %}
+      <h1> Welcome, {{username}} </h1>
+      <p> Your password is {{password}}</p>
+      <img src="{% static 'images/image_1.jpg' %}">
+      <br><br>
+      <p> You can now access the Bulletin App <a href="{% url 'post_list' %}">here</a></p>
+      <br>
+  <form class="form-signin" action="{% url 'user_auth:logout' %}" method="POST">
+      {% csrf_token %}
+      <button class="btn btn-primary" type="submit">Logout</button>
+  </form>
+
+  {% else %}
+      <h1> Welcome </h1>
+      <a href=" {% url 'user_auth:login' %} ">Login</a>
+      <a href=" {% url 'user_auth:register' %} ">Register</a>
+  {% endif %}
+</body>
+</html>

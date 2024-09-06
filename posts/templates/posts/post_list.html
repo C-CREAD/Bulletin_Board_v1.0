@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+<!-- Post List Template -->
+{% block title %}Bulletin Board - {{ page_title }}{% endblock %}
+
+{% block content %}
+  <h2>{{ page_title }}</h2>
+  <a class="btn btn-primary" href="{% url 'post_create' %}">Create New Post</a>
+
+  <br><br>
+  <ul>
+      <!-- Displays All Posts -->
+      {% for post in posts %}
+          <li>
+              <a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a>
+            <p>{{ post.content }}</p>
+          </li>
+      {% endfor %}
+  </ul>
+{% endblock %}

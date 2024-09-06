@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+<!-- Post Form Template -->
+{% block title %}Bulletin Board - {%if form.instance.pk %}Edit{% else %}
+Create{% endif %} Post{% endblock %}
+
+<!-- Displays between Create or Edit Post Form-->
+{% block content %}
+  <h2>{% if form.instance.pk %}Edit{% else %}Create{% endif %} Post </h2>
+
+  <form method="post" action="{% if form.instance.pk %}
+  {% url 'post_update' pk=form.instance.pk %}{% else %}{% url 'post_create' %}
+  {% endif %}">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button class="btn btn-primary" type="submit">Save</button>
+  </form>
+  <a href="{% url 'post_list' %}">Back to Post List</a>
+{% endblock %}
