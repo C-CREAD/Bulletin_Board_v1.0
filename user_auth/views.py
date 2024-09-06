@@ -9,13 +9,25 @@ from django.urls import reverse
 
 # Create your views here.
 def user_login(request):
-    """Renders the login page"""
+    """
+    Renders the login page
+
+    :param request: HTTP request object.
+    :return: Rendered login template.
+    :rtype: Django Render Object
+    """
     return render(request, 'authentication/login.html')
 
 
 def authenticate_user(request):
-    """Verifies the user's login credentials, then redirects them
-    to the polls page if successful"""
+    """
+    Verifies the user's login credentials, then redirects them
+    to the polls page if successful
+
+    :param request: HTTP request object.
+    :return: Rendered user template if successful, else login template.
+    :rtype: Django Reverse Object
+    """
 
     username = request.POST['username']
     password = request.POST['password']
@@ -36,7 +48,13 @@ def authenticate_user(request):
 
 
 def show_user(request):
-    """Renders the welcome page"""
+    """
+    Renders the welcome page
+
+    :param request: HTTP request object.
+    :return: Rendered user template containing their details.
+    :rtype: Django Render Object
+    """
 
     print(request.user.username)
     if request.user.username == "":
@@ -48,8 +66,14 @@ def show_user(request):
 
 
 def register(request):
-    """Renders registration page and redirects user
-    to login page if successful"""
+    """
+    Renders registration page and redirects user
+    to login page if successful
+
+    :param request: HTTP request object.
+    :return: Rendered registration template to for new users.
+    :rtype: Django Render Object
+    """
 
     if request.method == "POST":
         form = UserCreationForm(request.POST)

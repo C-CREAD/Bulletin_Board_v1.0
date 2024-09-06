@@ -8,7 +8,12 @@ from .forms import PostForm
 # Create your views here.
 def authentication(request):
     """Checks if the user is logged in and returns True or redirects user
-    back to the login page."""
+    back to the login page.
+
+    :param request: HTTP request object.
+    :return: HTTP redirection response.
+    :rtype: Django HttpResponseRedirect Object
+    """
     if request.user.is_authenticated is False:
         return HttpResponseRedirect(reverse('user_auth:login'))
 
@@ -19,6 +24,7 @@ def post_list(request):
 
     :param request: HTTP request object.
     :return: Rendered template with a list of posts.
+    :rtype: Django Render Object
     """
     if request.user.is_authenticated:
         posts = Post.objects.all()
@@ -43,6 +49,7 @@ def post_detail(request, pk):
     :param request: HTTP request object.
     :param pk: Primary key of the post.
     :return: Rendered template with details of the specific post.
+    :rtype: Django Render Object
     """
     if request.user.is_authenticated:
         post = get_object_or_404(Post, pk=pk)
@@ -58,6 +65,7 @@ def post_create(request):
 
     :param request: HTTP request object.
     :return: Rendered template for creating a new post.
+    :rtype: Django Render Object
     """
     if request.user.is_authenticated:
         if request.method == 'POST':
@@ -82,6 +90,7 @@ def post_update(request, pk):
     :param request: HTTP request object.
     :param pk: Primary key of the post to be updated.
     :return: Rendered template for updating the specific post.
+    :rtype: Django Render Object
     """
     if request.user.is_authenticated:
         post = get_object_or_404(Post, pk=pk)
@@ -106,6 +115,7 @@ def post_delete(request, pk):
     :param request: HTTP request object.
     :param pk: Primary key of the post to be deleted
     :return: Redirect to the post list after deletion.
+    :rtype: Django Redirect Object
     """
     if request.user.is_authenticated:
         post = get_object_or_404(Post, pk=pk)
