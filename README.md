@@ -49,8 +49,13 @@ To install this project on your computer, please follow these steps in order:
     ```shell
     pip install -r requirements.txt
     ```
-   
-6. Run the manage.py file:
+
+6. Apply all migrations to the manage.py file:
+    ```shell
+    python manage.py migrate
+    ```
+    
+7. Run the manage.py file:
     ```shell
     python manage.py runserver
     ```
